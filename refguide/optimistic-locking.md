@@ -7,16 +7,21 @@ parent: "data-storage"
 # Optimistic Locking
 
 ## Introduction
-Optimistic Locking is a technique to guarantee prevention for concurrent modification of a table record. It differs from _pessimistic locking_ as the latter puts an actual lock on the record at the time of reading. This reduces the performance and scalability of the system. Optimistic locking uses a `version` column in the table to verify whether the record is still the same as it was at the time of reading it.
+Optimistic Locking is a technique to guarantee prevention for concurrent modification of a table record. It differs from _pessimistic locking_ as the latter puts an actual lock on the database record at the time of reading. This reduces the performance and scalability of the system. Also, this is not an applicable pattern for stateless services. Optimistic locking uses a `version` column in the table to verify whether the record is still the same as it was at the time of reading it.
 
 ## Available since
 Optimistic locking is available from Mendix 7.5 onwards.
 
-## Behavior before Mendix 7.5
+## Behavior before Mendix 7.5 or when Optimistic Locking is disabled
 Before Mendix 7.5 the runtime did no locking. Concurrent Modifications are resolved by the Last Writer Wins strategy. This is still the behavior when optimistic locking is disabled in the `Runtime` tab of the `Project Settings`.
 
 ## Implementation in Mendix
 When Optimistic Locking is enabled, each entity gets an additional system attribute with the name `MxObjectVersion` of type `Long`. This field is automatically populated with the correct value. The default value is `1` and this value will be automatically increased every commit of that entity instance. 
+
+### New projects and migration
+From Mendix 7.5 onwards, Optimistic Locking is enabled by default when you create a new app. However, when migrating existing apps to Mendix 7.5, this feature is disabled by default.
+
+In case an existing app already had the `MxObjectVersion` attribute, then a duplicate attribute will be reported in the Modeler. This must be fixed by renaming the existing attribute to another name. The system attribute cannot be renamed.
 
 ### Impact on insert
 There is no impact on insert as this will just introduce the record in the database.
