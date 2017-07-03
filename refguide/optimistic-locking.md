@@ -7,7 +7,7 @@ parent: "data-storage"
 # Optimistic Locking
 
 ## Introduction
-Optimistic Locking is a technique to guarantee prevention for concurrent modification of a table record. It differs from _pessimistic locking_ as the latter puts an actual lock on the database record at the time of reading. This reduces the performance and scalability of the system. Also, this is not an applicable pattern for stateless services. Optimistic locking uses a `version` column in the table to verify whether the record is still the same as it was at the time of reading it.
+_Optimistic Locking_ is a technique to guarantee prevention for concurrent modification of a table record. It differs from _pessimistic locking_ as the latter puts an actual lock on the database record at the time of reading. _Pessimistic Locking_ reduces the performance and scalability of the system. Also, this is not an applicable pattern for stateless services. _Optimistic locking_ uses a `version` column in the table to verify whether the record is still the same as it was at the time of reading it.
 
 ## Available since
 Optimistic locking is available from Mendix 7.5 onwards.
@@ -27,7 +27,7 @@ In case an existing app already had the `MxObjectVersion` attribute, then a dupl
 There is no impact on insert as this will just introduce the record in the database.
 
 ### Impact on update and delete
-When no concurrent modification happens, update or delete happens as before. However, when a concurrent modification is detected, the runtime will throw a `ConcurrentModificationException`. This exception prevents the transaction from succeeding. If the entity instance was deleted before applying the update or the delete, then this will result in an exception stating that the record cannot be found (as is the case without optimistic locking too).
+When no concurrent modification occurs, update or delete happens as before. However, when a concurrent modification is detected, the runtime will throw a `ConcurrentModificationException`. This exception prevents the transaction from succeeding. If the entity instance was deleted before applying the update or the delete, then this will result in an exception stating that the record cannot be found (as is the case without optimistic locking too).
 
 ### Impact on performance
 This attribute is only added to the entities that are not derived from other entities. This way all entities will have this attribute (the derived entities will derive it from the parent entity). This causes every entity to have maximum one extra attribute in queries and an extra check upon update or delete. There can be some performance impact, although it is expected to be minor.
