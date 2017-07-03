@@ -172,6 +172,8 @@ When this option is enabled, then the App will perform optimistic locking during
 
 For existing projects upgraded to Mendix 7.5 and higher, this will be disabled by default. For new projects created in Mendix 7.5 and higher this is enabled by default.
 
+For more details on Optimistic Locking, see [Optimistic Locking](optimistic-locking).
+
 ## Modeler
 
 These settings determine the behavior of the Modeler for this project. The settings apply to everyone that is working on this project.
