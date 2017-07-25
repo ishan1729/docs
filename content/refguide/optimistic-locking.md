@@ -36,8 +36,10 @@ This attribute is only added to the entities that are not derived from other ent
 ### How the error is reported
 The error reported in the client is "An error has occurred during processing the request". The runtime log file contains an entry with the following details:
 ```
-com.mendix.modules.microflowengine.MicroflowException: com.mendix.core.CoreRuntimeException: com.mendix.systemwideinterfaces.MendixRuntimeException: com.mendix.core.CoreException: com.mendix.core.CoreRuntimeException: com.mendix.systemwideinterfaces.MendixRuntimeException: com.mendix.systemwideinterfaces.connectionbus.data.ConcurrentModificationRuntimeException: Object of type 'MyFirstModule.MyEntity' with guid '3940649673949185' cannot be updated, as it is modified by someone else
+[..] 
+com.mendix.systemwideinterfaces.connectionbus.data.ConcurrentModificationRuntimeException: Object of type 'MyFirstModule.MyEntity' with guid '3940649673949185' cannot be updated, as it is modified by someone else
 	at MyFirstModule.MyMicroflow (Change : 'Change 'MyEntity'')
+[..]
 ```
 
 This error shows that there was a `ConcurrentModificationRuntimeException` during execution of the change action `Change 'MyEntity'` of the microflow `MyFirstModule.MyMicroflow. The object had the id `3940649673949185` and was of type `MyFirstModule.MyEntity`.
