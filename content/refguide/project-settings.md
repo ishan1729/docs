@@ -159,6 +159,14 @@ For more details on migration, see [Uniqueness Constraint Migration](uniqueness-
 
 Falling back to the **Runtime** option will remove the unique constraints from the database, and uniqueness rules will not be checked at the database level anymore. Hence, data accuracy cannnot be guaranteed at the highest level, especially in the case of high concurrency transactions.
 
+### Optimistic Locking
+
+When this option is enabled, then the App will perform optimistic locking during update and delete. This prevents overwriting changes to data made concurrently by another user. When this option is disabled, then the behavior in case of a concurrent modification is that the last writer wins. This is the behavior of Mendix 7.5 and earlier.
+
+For existing projects upgraded to Mendix 7.6 and higher, this will be disabled by default. For new projects created in Mendix 7.6 and higher this is enabled by default.
+
+For more details on Optimistic Locking, see [Optimistic Locking](optimistic-locking).
+
 ## Modeler
 
 These settings determine the behavior of the Modeler for this project. The settings apply to everyone that is working on this project.
