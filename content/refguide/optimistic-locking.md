@@ -19,6 +19,9 @@ When Optimistic Locking is enabled, each entity gets an additional system attrib
 
 Upon _update_ and _delete_, the attribute value is read from the object and compared to the value available for this record in the database. If it is the same, then the update or delete will proceed. If it is different, a `ConcurrentModificationRuntimeException` is thrown, preventing the update or delete from proceeding. The `MxObjectVersion` attribute on the Mendix object is not write-protected. Settings this value however will not result in this value being saved into the database. It's current value will be used to compare it with the value for the same record in the database.
 
+### Limitations of the current implementation
+The current implementation works on all changes initiated and committed within one backend request. The client part is not done yet, meaning that objects send from the client don't preserve the version yet. As such in changes done from the client it is still the case that the last writer wins. 
+
 ### New projects and migration
 From Mendix 7.6 onwards, Optimistic Locking is enabled by default when you create a new app. However, when migrating existing apps to Mendix 7.6, this feature is disabled by default.
 
