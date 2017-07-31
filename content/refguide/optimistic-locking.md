@@ -37,7 +37,7 @@ When no concurrent modification occurs, update or delete happens as before. Howe
 This attribute is only added to the entities that are not derived from other entities. This way all entities will have this attribute (the derived entities will derive it from the parent entity). This causes every entity to have maximum one extra attribute in queries and an extra check upon update or delete. There can be some performance impact, although it is expected to be minor.
 
 ### How the error is reported
-The error reported in the client is "An error has occurred during processing the request". The runtime log file contains an entry with the following details:
+The error reported in the client is "Someone else is already modifying the same data. Please try again in a few minutes.". The runtime log file contains an entry with the following details:
 ```
 [..] 
 com.mendix.systemwideinterfaces.connectionbus.data.ConcurrentModificationRuntimeException: Object of type 'MyFirstModule.MyEntity' with guid '3940649673949185' cannot be updated, as it is modified by someone else
